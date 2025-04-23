@@ -1,0 +1,69 @@
+[
+  {
+    "quote_id": "QTE-CD08A175",
+    "customer_id": "CUST1745401226-cc21049f",
+    "project_name": "Untitled Project",
+    "questionnaire_snapshot": {
+      "video_length": 4.0,
+      "deliverables": 1,
+      "distribution": [],
+      "format": "Commercial",
+      "special_requirements": [],
+      "concept": "",
+      "shoot_date": null,
+      "delivery_date": null,
+      "budget_min": 0,
+      "budget_max": 0
+    },
+    "production_vars_snapshot": {
+      "shooting_days": 1.0,
+      "crew_size": 5,
+      "location": "none",
+      "talent_count": 1,
+      "agency_markup": false,
+      "props_design": "basic",
+      "footage_volume": "standard",
+      "contingency": 10
+    },
+    "low_quote": 36707000,
+    "high_quote": 60207000,
+    "recommended_quote": 54271840,
+    "line_items_snapshot": {
+      "Pre-production": {
+        "low": 2200000.0,
+        "high": 4800000.0
+      },
+      "Crew Costs": {
+        "low": 9200000.0,
+        "high": 11040000.0
+      },
+      "Equipment": {
+        "low": 5000000.0,
+        "high": 10000000.0
+      },
+      "Location": {
+        "low": 0,
+        "high": 0
+      },
+      "Talent": {
+        "low": 1000000.0,
+        "high": 2000000.0
+      },
+      "Post-production": {
+        "low": 12000000.0,
+        "high": 20000000.0
+      },
+      "Producer Fee": {
+        "low": 2753025.0,
+        "high": 4515525.0
+      },
+      "Contingency": {
+        "low": 3670700.0,
+        "high": 6020700.0
+      }
+    },
+    "status": "Draft",
+    "creation_date": "2025-04-23 16:41:01.986293",
+    "last_updated_date": "2025-04-23 16:41:01.986298"
+  }
+]

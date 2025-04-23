@@ -1,0 +1,105 @@
+{
+  "customers": [
+    {
+      "customer_id": "CUST1745399958-45236a58",
+      "name": "Denny Leonardo",
+      "email": "dennyleonardo1995@gmail.com",
+      "phone": "082144781206",
+      "company": "Gmail",
+      "address": {
+        "street": "jl. danau poso no.12",
+        "city": "",
+        "state": "Banten",
+        "postal_code": "15811",
+        "country": "Indonesia"
+      },
+      "preferences": {
+        "communication": "email",
+        "newsletter": false
+      },
+      "notes": "",
+      "questionnaire_draft": {
+        "video_length": 2.0,
+        "deliverables": 1,
+        "distribution": [],
+        "format": "Commercial",
+        "special_requirements": [],
+        "concept": "",
+        "shoot_date": null,
+        "delivery_date": null,
+        "budget_min": 0,
+        "budget_max": 0
+      },
+      "production_vars_draft": {
+        "shooting_days": 1.0,
+        "crew_size": 5,
+        "location": "none",
+        "talent_count": 1,
+        "agency_markup": false,
+        "props_design": "basic",
+        "footage_volume": "standard",
+        "contingency": 10
+      }
+    },
+    {
+      "customer_id": "CUST1745401226-cc21049f",
+      "name": "Denny Leonardo",
+      "email": "dennyleonardo@yahoo.com",
+      "phone": "082144781206",
+      "company": "",
+      "address": {
+        "street": "Jl. danau poso no.12, Taman Beverly Golf, Lippo Karawaci, Tangerang",
+        "city": "Kota Tangerang Selatan",
+        "state": "Banten",
+        "postal_code": "15811",
+        "country": "Indonesia"
+      },
+      "preferences": {
+        "communication": "email",
+        "newsletter": false
+      },
+      "notes": "",
+      "questionnaire_draft": {
+        "video_length": 4.0,
+        "deliverables": 1,
+        "distribution": [],
+        "format": "Commercial",
+        "special_requirements": [],
+        "concept": "",
+        "shoot_date": null,
+        "delivery_date": null,
+        "budget_min": 0,
+        "budget_max": 0
+      },
+      "production_vars_draft": {
+        "shooting_days": 1.0,
+        "crew_size": 5,
+        "location": "none",
+        "talent_count": 1,
+        "agency_markup": false,
+        "props_design": "basic",
+        "footage_volume": "standard",
+        "contingency": 10
+      }
+    },
+    {
+      "customer_id": "CUST1745401423-8909e70a",
+      "name": "Ade",
+      "email": "",
+      "phone": "",
+      "company": "",
+      "address": {
+        "street": "",
+        "city": "",
+        "state": "",
+        "postal_code": "",
+        "country": ""
+      },
+      "preferences": {
+        "communication": "email",
+        "newsletter": false
+      },
+      "notes": ""
+    }
+  ]
+}
