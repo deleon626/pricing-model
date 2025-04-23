@@ -1,0 +1,63 @@
+{
+  "scriptwriting": {
+    "base": 2000000,
+    "complexity_factors": {
+      "simple": 0.5,
+      "standard": 1.0,
+      "complex": 1.5
+    }
+  },
+  "storyboard": {
+    "base": 1500000
+  },
+  "location": {
+    "none": 0,
+    "Studio (1.5 M)": 1500000,
+    "Styled Home (6 M)": 6000000,
+    "Rooftop Café (4.5 M)": 4500000
+  },
+  "crew_roles": {
+    "Director": 3000000,
+    "DOP": 2500000,
+    "Camera Assistant": 1000000,
+    "Gaffer": 1200000,
+    "Sound Engineer": 1500000,
+    "Production Assistant": 800000
+  },
+  "equipment": {
+    "basic": 5000000,
+    "premium": 10000000
+  },
+  "post_production": {
+    "editing": {
+      "per_minute": 2000000,
+      "complexity": {
+        "simple": 0.8,
+        "standard": 1.0,
+        "complex": 1.3
+      }
+    },
+    "color": {
+      "per_minute": 1000000,
+      "complexity": {
+        "simple": 0.8,
+        "standard": 1.0,
+        "complex": 1.3
+      }
+    },
+    "sfx": {
+      "per_minute": 800000,
+      "complexity": {
+        "simple": 0.7,
+        "standard": 1.0,
+        "complex": 1.5
+      }
+    }
+  },
+  "producer_fee": {
+    "percent": 0.075
+  },
+  "contingency": {
+    "default": 0.10
+  }
+} 
