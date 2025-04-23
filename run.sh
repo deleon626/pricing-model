@@ -1,12 +1,12 @@
 #!/bin/bash
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
+# Create a virtual environment with uv if it doesn't exist
+if [ ! -d ".venv" ]; then
+  uv venv
+fi
 
-# Install requirements if needed
-pip install -r requirements.txt
+# Install requirements using uv
+uv pip install -r requirements.txt
 
-# Run the Streamlit app
-streamlit run app.py 
+# Run the Streamlit app using uv
+uv run streamlit run app.py 
