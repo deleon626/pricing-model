@@ -81,25 +81,6 @@
         "footage_volume": "standard",
         "contingency": 10
       }
-    },
-    {
-      "customer_id": "CUST1745401423-8909e70a",
-      "name": "Ade",
-      "email": "",
-      "phone": "",
-      "company": "",
-      "address": {
-        "street": "",
-        "city": "",
-        "state": "",
-        "postal_code": "",
-        "country": ""
-      },
-      "preferences": {
-        "communication": "email",
-        "newsletter": false
-      },
-      "notes": ""
     }
   ]
 }

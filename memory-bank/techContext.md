@@ -4,6 +4,7 @@
 - Python 3.x
 - Streamlit (for UI)
 - JSON (for data storage)
+- UUID (for customer ID generation)
 
 ## Development Setup
 - Local development with virtual environments (see .venv/)
@@ -14,13 +15,16 @@
 - Must remain compatible with Streamlit and Python 3.x
 - Data must be easily exportable/importable (JSON, CSV)
 - UI should be responsive and accessible
+- File-based storage is not safe for concurrent users; consider database migration for multi-user support
 
 ## Dependencies
 - streamlit
 - pydantic (if used for data validation)
-- Standard Python libraries (json, os, etc.)
+- Standard Python libraries (json, os, uuid, etc.)
 
 ## Tool Usage Patterns
 - Streamlit for all user interactions
 - Utility modules for data and export logic
-- Modular codebase for maintainability 
+- Modular codebase for maintainability
+- Use of UUIDs for robust customer ID generation
+- Plan for future migration to SQLite, PostgreSQL, or cloud DB for concurrency 

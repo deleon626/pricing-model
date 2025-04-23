@@ -762,47 +762,101 @@ def render_sidebar_customer_selector(selected_customer, show_customer_form, DEFA
             action = 'edit'
     return newly_selected_customer, show_customer_form, action 
 
-def render_customers_table(customers, on_edit, on_delete, on_add):
+def render_customers_table(customers: List[Dict[str, Any]], on_edit: Callable, on_delete: Callable, on_add: Callable):
     """
-    Render an interactive, scrollable table of customers with edit/delete/add actions.
-    Args:
-        customers: List of customer dicts
-        on_edit: function(customer) -> None, called when edit is clicked
-        on_delete: function(customer_id) -> None, called when delete is confirmed
-        on_add: function() -> None, called when add is clicked
+    Render an interactive table for customers with Edit/Delete actions.
+    Includes inline confirmation for deletion.
     """
-    st.markdown("### Customers List")
-    add_col, _ = st.columns([1, 5])
-    with add_col:
-        if st.button("➕ Add Customer", help="Add a new customer"):
-            on_add()
-    st.markdown("")
+    st.subheader("Manage Customers")
+
+    # Initialize confirming_delete_customer_id if not present (safety check)
+    if 'confirming_delete_customer_id' not in st.session_state:
+        st.session_state.confirming_delete_customer_id = None
+
     if not customers:
-        st.info("No customers found.")
+        st.info("No customers found. Add one to get started.")
+        if st.button("➕ Add First Customer"):
+            on_add()
         return
-    # Prepare DataFrame for display
-    df = pd.DataFrame(customers)
-    display_cols = [
-        "customer_id", "name", "email", "phone", "company"
-    ]
-    df_display = df[display_cols].rename(columns={
-        "customer_id": "ID",
-        "name": "Name",
-        "email": "Email",
-        "phone": "Phone",
-        "company": "Company"
-    })
-    st.dataframe(df_display, use_container_width=True, hide_index=True)
-    # Render action buttons per row
-    for idx, row in df.iterrows():
-        cols = st.columns([2, 1, 1])
-        with cols[0]:
-            st.markdown(f"**{row['name']}**  ")
-        with cols[1]:
-            if st.button("✏️ Edit", key=f"edit_{row['customer_id']}", help="Edit this customer"):
-                on_edit(row)
-        with cols[2]:
-            if st.button("🗑️ Delete", key=f"delete_{row['customer_id']}", help="Delete this customer"):
-                confirm = st.checkbox(f"Confirm delete {row['name']}?", key=f"confirm_delete_{row['customer_id']}")
-                if confirm:
-                    on_delete(row['customer_id']) 
+
+    # Prepare data for display (including placeholders for actions)
+    display_data = []
+    for customer in customers:
+        # Ensure consistent structure, handle potential missing keys gracefully
+        row_data = {
+            'customer_id': customer.get('customer_id', 'N/A'),
+            'Name': customer.get('name', 'N/A'),
+            'Email': customer.get('email', ''),
+            'Company': customer.get('company', ''),
+            'Added': customer.get('created_at', 'N/A') # Assuming created_at exists
+        }
+        # Format timestamp if it exists and is a valid format
+        if 'created_at' in customer and customer['created_at']:
+            try:
+                # Assuming created_at is a Unix timestamp or ISO string
+                ts = pd.to_datetime(customer['created_at'])
+                row_data['Added'] = ts.strftime('%Y-%m-%d') # Just date for brevity
+            except (ValueError, TypeError):
+                 row_data['Added'] = 'Invalid Date' # Handle parsing errors
+
+
+        display_data.append(row_data)
+
+    df = pd.DataFrame(display_data)
+
+    # Display basic info table (consider using st.dataframe with configuration for actions later)
+    # Simplified for clarity - Using columns for button layout
+    st.markdown("---")
+    cols = st.columns([2, 3, 2, 2, 3]) # Adjust widths as needed: Name, Email, Company, Added, Actions
+    headers = ["Name", "Email", "Company", "Added", "Actions"]
+    for col, header in zip(cols, headers):
+        col.markdown(f"**{header}**")
+
+    for index, row in df.iterrows():
+        customer_id = row['customer_id']
+        col1, col2, col3, col4, col5 = st.columns([2, 3, 2, 2, 3])
+
+        with col1:
+            st.write(row['Name'])
+        with col2:
+            st.write(row['Email'] or "-")
+        with col3:
+            st.write(row['Company'] or "-")
+        with col4:
+            st.write(row['Added'])
+        with col5:
+            # Remove nested columns: action_col1, action_col2 = st.columns(2)
+            customer_data_for_edit = next((c for c in customers if c.get('customer_id') == customer_id), None)
+
+            # Edit Button (place directly in col5)
+            edit_button_placeholder = st.empty() # Use placeholder if needed for dynamic visibility
+            if not (st.session_state.confirming_delete_customer_id == customer_id): # Hide edit when confirming delete
+                if edit_button_placeholder.button("✏️", key=f"edit_{customer_id}", help="Edit Customer"):
+                    if customer_data_for_edit:
+                        on_edit(customer_data_for_edit)
+                    else:
+                        st.error(f"Could not find full data for customer ID {customer_id}")
+
+            # Delete/Confirm/Cancel Buttons (place directly in col5)
+            delete_button_placeholder = st.empty()
+            confirm_button_placeholder = st.empty()
+            cancel_button_placeholder = st.empty()
+
+            if st.session_state.confirming_delete_customer_id == customer_id:
+                # Show Confirm/Cancel buttons
+                if confirm_button_placeholder.button("✔️", key=f"confirm_{customer_id}", help="Confirm Delete"):
+                    on_delete(customer_id)
+                    st.session_state.confirming_delete_customer_id = None
+                    st.rerun()
+                if cancel_button_placeholder.button("❌", key=f"cancel_{customer_id}", help="Cancel Delete"):
+                    st.session_state.confirming_delete_customer_id = None
+                    st.rerun()
+            else:
+                # Show standard Delete button
+                if delete_button_placeholder.button("🗑️", key=f"delete_{customer_id}", help="Delete Customer"):
+                    st.session_state.confirming_delete_customer_id = customer_id
+                    st.rerun()
+
+    st.markdown("---")
+    if st.button("➕ Add New Customer"):
+        on_add() 

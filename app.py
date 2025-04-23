@@ -50,6 +50,9 @@ if "show_customer_form" not in st.session_state:
 if "active_tab" not in st.session_state:
     st.session_state.active_tab = "Quote Builder"
 
+if "confirming_delete_customer_id" not in st.session_state:
+    st.session_state.confirming_delete_customer_id = None
+
 # Define tabs globally so it's accessible in the __main__ block
 tabs = ["Quote Builder", "Rates"]
 
@@ -141,7 +144,9 @@ def main():
             st.session_state.customer_table_action = "edit"
             st.session_state.customer_table_edit_data = customer
         def handle_delete(customer_id):
+            print(f"Attempting to delete customer with ID: {customer_id}") # Debug print
             deleted = delete_customer(customer_id)
+            print(f"delete_customer returned: {deleted}") # Debug print
             if deleted:
                 st.success("Customer deleted.")
                 if st.session_state.selected_customer and st.session_state.selected_customer.get("customer_id") == customer_id:
